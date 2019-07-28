@@ -6,5 +6,5 @@ import (
 )
 
 func Configure(b *bootstrap.Bootstrapper)  {
-	b.GET("/", controller.Index)
+	b.GET("/", new(controller.Index).Welcome)
 }

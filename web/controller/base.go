@@ -15,9 +15,17 @@ func (t *Base) Api(c *gin.Context, code int, data interface{}) {
 	c.JSON(code, data)
 }
 
-func (t *Base) Succ(c *gin.Context, msg string) {
+func (t *Base) Succ(c *gin.Context, msg string, data ...interface{}) {
+
+	var d interface{}
+	if data != nil && len(data) > 0 {
+		d = data[0]
+	}
+
 	t.Api(c, http.StatusOK, gin.H{
+		"success": true,
 		"msg": msg,
+		"data": d,
 	})
 }
 
@@ -39,6 +47,7 @@ func (t *Base) Err(c *gin.Context, msg string) {
 
 	fmt.Println("[Error]", msg)
 	t.Api(c, http.StatusBadRequest, gin.H{
+		"success": false,
 		"msg": msg,
 	})
 }
