@@ -8,8 +8,16 @@ import (
 	"go-gw/web/middleware"
 	"go-gw/web/routes"
 	"net/http"
+	"os/exec"
+	"runtime"
 	"time"
 )
+
+var commands = map[string]string{
+	"windows": "start",
+	"darwin":  "open",
+	"linux":   "xdg-open",
+}
 
 func newApp() *bootstrap.Bootstrapper {
 	// 初始化应用
@@ -33,6 +41,11 @@ func startServer (b *bootstrap.Bootstrapper)  {
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
+	}
+
+	if run, ok := commands[runtime.GOOS]; ok {
+		cmd := exec.Command(run, "http://localhost:" + config.Cfg.Produce.Port)
+		_ = cmd.Start()
 	}
 
 	go func() {
