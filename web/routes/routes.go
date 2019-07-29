@@ -7,4 +7,6 @@ import (
 
 func Configure(b *bootstrap.Bootstrapper)  {
 	b.GET("/", new(controller.Index).Welcome)
+	// 分类
+	b.GET("/category/add", new(controller.Category).CategoryAdd)
 }

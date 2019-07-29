@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/smokezl/govalidators"
 	"go-gw/common"
 	"net/http"
 )
@@ -50,4 +51,14 @@ func (t *Base) Err(c *gin.Context, msg string) {
 		"success": false,
 		"msg": msg,
 	})
+}
+
+func (t *Base) Validator(c *gin.Context, ValidatorData interface{}) bool {
+	validator := govalidators.New()
+	err := validator.LazyValidate(ValidatorData)
+	if err != nil {
+		fmt.Println("err:", err)
+		return false
+	}
+	return true
 }

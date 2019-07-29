@@ -18,10 +18,14 @@ github.com/qiniu/api.v7 v7.2.5+incompatible h1:6KKaGt7MbFzVGSniwzv7qsM/Qv0or4SkR
 github.com/qiniu/api.v7 v7.2.5+incompatible/go.mod h1:V8/EzlTgLN6q0s0CJmg/I81ytsvldSF22F7h6MI02+c=
 github.com/qiniu/x v7.0.8+incompatible h1:P4LASsfwJY7SoZ13dwqBwGhZh7HKU8cdFVCUkmz0gZ8=
 github.com/qiniu/x v7.0.8+incompatible/go.mod h1:KpRKWYG/GaidPQVpoQ2Cvuvtts3gYnoo2PftgdmAiU4=
+github.com/smokezl/govalidators v0.0.0-20181012065008-5fded539f530 h1:dSRHjbbPaBy4S9VwMlShv/zdntcO8vjc1n3DKqOZSI4=
+github.com/smokezl/govalidators v0.0.0-20181012065008-5fded539f530/go.mod h1:I6zBQ7u+cwUhsV60+iFaF9jBpTyujRQGXrAygBvI9ZE=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/ugorji/go v1.1.4 h1:j4s+tAvLfL3bZyefP2SEWmhBzmuIlH/eqNuPdFPgngw=
 github.com/ugorji/go v1.1.4/go.mod h1:uQMGLiO92mf5W77hV/PUCpI3pbzQx3CRekS0kk+RGrc=
+github.com/zctod/go-tool v0.0.3 h1:nqnDzKlBBZDuPJZ1wteWvGuLm2AQAiz/ZXJve4c5tX0=
+github.com/zctod/go-tool v0.0.3/go.mod h1:nf3J26/YPpS7BL4Et/GB2IdcI8bj76uX95E/EtyA7QE=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/net v0.0.0-20190503192946-f4e77d36d62c h1:uOCk1iQW6Vc18bnC13MfzScl+wdKBmM9Y9kU7Z83/lw=
 golang.org/x/net v0.0.0-20190503192946-f4e77d36d62c/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
