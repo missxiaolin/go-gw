@@ -3,3 +3,4 @@ produce:
 qiniu:
   ak: ""
   sk: ""
+  bucket: ""

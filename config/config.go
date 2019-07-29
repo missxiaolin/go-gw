@@ -6,7 +6,14 @@ import (
 )
 
 type configure struct {
-	Produce Produce       `yaml:"produce"`
+	Produce Produce			`yaml:"produce"`
+	QiNiu	QiNiuConfig		`yaml:"qiniu"`
+}
+
+type QiNiuConfig struct {
+	Ak		string			`yaml:"ak"`		// ak
+	Sk		string			`yaml:"sk"`		// sk
+	Bucket	string			`yaml:"bucket"`	// bucket
 }
 
 type Produce struct {
