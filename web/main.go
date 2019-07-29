@@ -21,6 +21,7 @@ func newApp() *bootstrap.Bootstrapper {
 	// 初始化应用
 	app := bootstrap.New("北瑟官网", "xiaolin")
 	app.Bootstrap()
+	app.Use(middleware.Cors())
 	app.Configure(routes.Configure, routes.AdminConfigure)
 
 	return app
@@ -28,7 +29,7 @@ func newApp() *bootstrap.Bootstrapper {
 
 func main()  {
 	app := newApp()
-	app.Use(middleware.Cors())
+
 	startServer(app)
 }
 
