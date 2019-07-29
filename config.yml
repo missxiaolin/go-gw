@@ -1,2 +1,5 @@
 produce:
   port: "8080"
+qiniu:
+  ak: "IOqaAt0KRQN6efS2YreXr63W5TBgM9Ro75llHlAD"
+  sk: "-k587XauIEIc497Jo-Zji2c1Y57p_O51ZpVcNzrf"

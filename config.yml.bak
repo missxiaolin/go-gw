@@ -1,2 +1,5 @@
 produce:
   port: "8080"
+qiniu:
+  ak: ""
+  sk: ""
