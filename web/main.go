@@ -8,8 +8,6 @@ import (
 	"go-gw/web/middleware"
 	"go-gw/web/routes"
 	"net/http"
-	"os/exec"
-	"runtime"
 	"time"
 )
 
@@ -43,10 +41,10 @@ func startServer (b *bootstrap.Bootstrapper)  {
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	if run, ok := commands[runtime.GOOS]; ok {
-		cmd := exec.Command(run, "http://localhost:" + config.Cfg.Produce.Port)
-		_ = cmd.Start()
-	}
+	//if run, ok := commands[runtime.GOOS]; ok {
+	//	cmd := exec.Command(run, "http://localhost:" + config.Cfg.Produce.Port)
+	//	_ = cmd.Start()
+	//}
 
 	go func() {
 		if err := server.ListenAndServe(); err != nil {
