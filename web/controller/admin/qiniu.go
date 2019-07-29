@@ -1,11 +1,12 @@
-package controller
+package admin
 
 import (
 	"github.com/gin-gonic/gin"
 	"go-gw/lib/qiniu"
+	"go-gw/web/controller"
 )
 
-type QiNiu struct{ Base }
+type QiNiu struct{ controller.Base }
 
 // 获取七牛token
 func (t *QiNiu) GetToken(c *gin.Context)  {

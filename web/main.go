@@ -21,7 +21,7 @@ func newApp() *bootstrap.Bootstrapper {
 	// 初始化应用
 	app := bootstrap.New("北瑟官网", "xiaolin")
 	app.Bootstrap()
-	app.Configure(routes.Configure)
+	app.Configure(routes.Configure, routes.AdminConfigure)
 
 	return app
 }
