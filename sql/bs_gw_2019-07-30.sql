@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.24)
 # Database: bs_gw
-# Generation Time: 2019-07-30 02:21:51 +0000
+# Generation Time: 2019-07-30 10:17:22 +0000
 # ************************************************************
 
 
@@ -20,12 +20,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-# Dump of table bs_article
+# Dump of table article
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `bs_article`;
+DROP TABLE IF EXISTS `article`;
 
-CREATE TABLE `bs_article` (
+CREATE TABLE `article` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文章表主键',
   `cid` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '分类id',
   `title` char(100) NOT NULL DEFAULT '' COMMENT '标题',
@@ -34,80 +34,87 @@ CREATE TABLE `bs_article` (
   `keywords` varchar(255) NOT NULL DEFAULT '' COMMENT '关键字',
   `description` char(255) NOT NULL DEFAULT '' COMMENT '描述',
   `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '文章是否显示 1是 0否',
-  `is_top` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否置顶 1是 0否',
-  `addtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
-# Dump of table bs_category
+# Dump of table category
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `bs_category`;
+DROP TABLE IF EXISTS `category`;
 
-CREATE TABLE `bs_category` (
+CREATE TABLE `category` (
   `id` tinyint(2) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类主键id',
-  `cname` varchar(15) NOT NULL DEFAULT '' COMMENT '分类名称',
-  `keywords` varchar(255) DEFAULT '' COMMENT '关键词',
+  `name` varchar(15) NOT NULL DEFAULT '' COMMENT '分类名称',
   `description` varchar(255) DEFAULT '' COMMENT '描述',
-  `sort` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `pid` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '父级栏目id',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+
+INSERT INTO `category` (`id`, `name`, `description`, `pid`, `created_at`, `updated_at`)
+VALUES
+	(1,'分类1','分类1',0,'2019-07-30 17:29:30','2019-07-30 17:29:24'),
+	(2,'分类2','分类2',0,'2019-07-30 17:29:39','2019-07-30 17:29:37');
+
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
-# Dump of table bs_config
+# Dump of table config
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `bs_config`;
+DROP TABLE IF EXISTS `config`;
 
-CREATE TABLE `bs_config` (
+CREATE TABLE `config` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(100) NOT NULL DEFAULT '' COMMENT '配置项键名',
   `value` text COMMENT '配置项键值 1表示开启 0 关闭',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
-# Dump of table bs_link
+# Dump of table link
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `bs_link`;
+DROP TABLE IF EXISTS `link`;
 
-CREATE TABLE `bs_link` (
+CREATE TABLE `link` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `lname` varchar(50) NOT NULL DEFAULT '' COMMENT '链接名',
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '链接名',
   `url` varchar(255) NOT NULL DEFAULT '' COMMENT '链接地址',
   `sort` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '排序',
-  `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '文章是否显示 1是 0否',
-  `is_delete` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除 1是 0否',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
-# Dump of table bs_users
+# Dump of table users
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `bs_users`;
+DROP TABLE IF EXISTS `users`;
 
-CREATE TABLE `bs_users` (
+CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(60) NOT NULL DEFAULT '' COMMENT '用户名',
+  `name` varchar(60) NOT NULL DEFAULT '' COMMENT '用户名',
   `password` varchar(64) NOT NULL DEFAULT '' COMMENT '登录密码；mb_password加密',
-  `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '用户头像，相对于upload/avatar目录',
-  `email` varchar(100) NOT NULL DEFAULT '' COMMENT '登录邮箱',
-  `email_code` varchar(60) DEFAULT NULL COMMENT '激活码',
-  `phone` bigint(11) unsigned DEFAULT NULL COMMENT '手机号',
   `status` tinyint(1) NOT NULL DEFAULT '2' COMMENT '用户状态 0：禁用； 1：正常 ；2：未验证',
-  `register_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '注册时间',
-  `last_login_ip` varchar(16) NOT NULL DEFAULT '' COMMENT '最后登录ip',
-  `last_login_time` int(10) unsigned NOT NULL COMMENT '最后登录时间',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_login_key` (`username`) USING BTREE
+  KEY `user_login_key` (`name`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
