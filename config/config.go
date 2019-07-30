@@ -8,12 +8,21 @@ import (
 type configure struct {
 	Produce Produce			`yaml:"produce"`
 	QiNiu	QiNiuConfig		`yaml:"qiniu"`
+	Mysql	MysqlConfig		`yaml:"mysql"`
 }
 
 type QiNiuConfig struct {
 	Ak		string			`yaml:"ak"`		// ak
 	Sk		string			`yaml:"sk"`		// sk
 	Bucket	string			`yaml:"bucket"`	// bucket
+}
+
+type MysqlConfig struct {
+	SqlHost     string		`yaml:"host"`
+	SqlPort     string		`yaml:"port"`
+	SqlDb       string		`yaml:"db"`
+	SqlUsername string		`yaml:"username"`
+	SqlPassword string		`yaml:"password"`
 }
 
 type Produce struct {
