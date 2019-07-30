@@ -7,3 +7,7 @@ type Category struct {
 	Pid			string		`gorm:"type:tinyint;not null;" json:"pid"`
 	Timestamps
 }
+
+func (c *Category) getTable() string {
+	return "category"
+}

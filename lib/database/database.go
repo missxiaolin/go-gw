@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"go-gw/config"
 	"time"
@@ -14,8 +15,9 @@ func init()  {
 	optionStr := cfg.Mysql.SqlUsername + ":" + cfg.Mysql.SqlPassword + "@tcp(" + cfg.Mysql.SqlHost + ":" + cfg.Mysql.SqlPort + ")/" + cfg.Mysql.SqlDb + "?charset=utf8mb4&parseTime=True&loc=Local"
 	var err error
 
-	Db, err = gorm.Open("mysql", optionStr)
+	DB, err = gorm.Open("mysql", optionStr)
 	if err != nil {
+		fmt.Print(err)
 		panic(err)
 	}
 
@@ -31,18 +33,17 @@ func NewDB() *gorm.DB {
 
 func DBMigrate()  {
 	// 禁用表名复数
-	//DB.SingularTable(true)
+	DB.SingularTable(true)
 
 	// 自动生成表结构
-	DB.AutoMigrate(
-		&model.Admin{},
-		&model.Module{},
-		&model.ChartCategory{},
-		&model.ChartItem{},
-		&model.Note{},
-		&model.Config{},
-	)
-	fmt.Print("数据表迁移成功！")
-
-	Seed()
+	//DB.AutoMigrate(
+	//	&model.Users{},
+	//	&model.Link{},
+	//	&model.Config{},
+	//	&model.Category{},
+	//	&model.Article{},
+	//)
+	//fmt.Print("数据表迁移成功！")
+	//
+	//Seed()
 }

@@ -10,4 +10,5 @@ func AdminConfigure(b *bootstrap.Bootstrapper)  {
 	b.GET("/qiniu/get/token", new(admin.QiNiu).GetToken)
 	// 分类
 	b.GET("/category/add", new(admin.Category).CategoryAdd)
+	b.GET("/category/list", new(admin.Category).GetCategory)
 }
