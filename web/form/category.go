@@ -2,8 +2,8 @@ package form
 
 type CategoryAddForm struct {
 	Name			string		`validate:"required"`
-	Pid          	uint		`validate:"required"`
-	Status          uint		`validate:"required"`
+	Pid          	uint		`json:"pid"`
+	Status          uint		`json:"status"`
 }
 
 type CategoryFindForm struct {

@@ -38,17 +38,18 @@ func (t *Base) Array(c *gin.Context, data interface{}) {
 
 	data, err := common.ArrayStructToMap(data)
 	if err != nil {
-		t.Err(c, err.Error())
+		t.Err(c, err.Error(), 500)
 		return
 	}
 	t.Data(c, data)
 }
 
-func (t *Base) Err(c *gin.Context, msg string) {
+func (t *Base) Err(c *gin.Context, msg string, ErrorCode uint) {
 
 	fmt.Println("[Error]", msg)
 	t.Api(c, http.StatusBadRequest, gin.H{
 		"success": false,
+		"ErrorCode": ErrorCode,
 		"msg": msg,
 	})
 }
