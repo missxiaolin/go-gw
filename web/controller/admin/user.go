@@ -20,6 +20,7 @@ func (t *User) Login(c *gin.Context) {
 		UserLoginForm form.UserLoginForm
 	)
 	err := c.BindJSON(&UserLoginForm)
+
 	if err != nil {
 		t.Err(c, "json解析错误", 500)
 		return

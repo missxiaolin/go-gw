@@ -52,7 +52,7 @@ func (t *Base) Array(c *gin.Context, data interface{}) {
 func (t *Base) Err(c *gin.Context, msg string, ErrorCode uint) {
 
 	fmt.Println("[Error]", msg)
-	t.Api(c, http.StatusBadRequest, gin.H{
+	t.Api(c, http.StatusOK, gin.H{
 		"success": false,
 		"ErrorCode": ErrorCode,
 		"msg": msg,
