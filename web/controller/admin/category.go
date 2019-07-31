@@ -1,6 +1,7 @@
 package admin
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-gw/common"
 	"go-gw/web/controller"
@@ -130,5 +131,5 @@ func (t *Category) GetCategory(c *gin.Context)  {
 		t.Err(c, "解析出错", 500)
 		return
 	}
-	t.Data(c, data)
+	t.Succ(c, "ok", data)
 }
