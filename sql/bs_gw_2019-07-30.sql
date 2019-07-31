@@ -33,7 +33,7 @@ CREATE TABLE `article` (
   `content` mediumtext NOT NULL COMMENT '文章内容',
   `keywords` varchar(255) NOT NULL DEFAULT '' COMMENT '关键字',
   `description` char(255) NOT NULL DEFAULT '' COMMENT '描述',
-  `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '文章是否显示 1是 0否',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '文章是否显示 1是 0否',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)

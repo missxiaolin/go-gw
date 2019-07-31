@@ -8,6 +8,6 @@ type Article struct {
 	Content		string		`gorm:"type:text;not null;" json:"content"`
 	Keywords	string		`gorm:"type:varchar(255);not null;" json:"keywords"`
 	Description	string		`gorm:"type:varchar(255);not null;" json:"description"`
-	IsShow		uint		`gorm:"type:tinyint;not null;" json:"isShow"`
+	Status		uint		`gorm:"type:tinyint;not null;" json:"status"`
 	Timestamps
 }
