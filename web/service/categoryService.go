@@ -32,6 +32,7 @@ func (s *CategoryService) GetCategoryByID(id interface{}) (category model.Catego
 // 修改分类
 func (s *CategoryService) CategoryUpdate(category model.Category) {
 	database.NewDB().Save(category)
+	return
 }
 
 // 搜索分类

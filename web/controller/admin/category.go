@@ -33,7 +33,7 @@ func (t *Category) CategoryAdd(c *gin.Context)  {
 	})
 
 	if err != nil {
-		t.Err(c, "创建分类失败", 500)
+		t.Err(c, err.Error(), 500)
 		return
 	}
 
