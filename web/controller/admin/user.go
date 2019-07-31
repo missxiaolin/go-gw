@@ -2,14 +2,50 @@ package admin
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-gw/config"
+	"go-gw/lib/jwt"
 	"go-gw/web/controller"
+	"go-gw/web/form"
+	"go-gw/web/service"
+	"time"
 )
 
 type User struct {
 	controller.Base
 }
 
+// 登录
 func (t *User) Login(c *gin.Context) {
+	var (
+		UserLoginForm form.UserLoginForm
+	)
+	err := c.BindJSON(&UserLoginForm)
+	if err != nil {
+		t.Err(c, "json解析错误", 500)
+		return
+	}
+	err = t.Validator(c, UserLoginForm)
+	if err != nil {
+		t.Err(c, "参错错误", 300)
+		return
+	}
+	users, err := new(service.UserService).UserLogin(UserLoginForm)
+	if err != nil {
+		t.Err(c, err.Error(), 500)
+		return
+	}
+	var data = map[string]interface{}{
+		"id":   users.ID,
+		"name": users.Name,
+	}
+	token, err := jwt.Create(data, config.JWT_SECRET_ADMIN, time.Now().Add(time.Hour * config.JWT_EXP_ADMIN).Unix())
+	if err != nil {
+		t.Err(c, "登陆失败", 500)
+		return
+	}
+	c.Request.Header.Set("token", token)
+
+	t.Succ(c, "ok", token)
 
 }
 
