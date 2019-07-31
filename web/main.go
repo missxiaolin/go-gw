@@ -22,7 +22,7 @@ func newApp() *bootstrap.Bootstrapper {
 	app := bootstrap.New("北瑟官网", "xiaolin")
 	app.Bootstrap()
 	app.Use(middleware.Cors())
-	app.Configure(routes.Configure, routes.AdminConfigure)
+	app.Configure(routes.Configure, routes.AdminConfigure, routes.ApiConfigure)
 
 	return app
 }
