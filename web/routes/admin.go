@@ -21,4 +21,11 @@ func AdminConfigure(b *bootstrap.Bootstrapper)  {
 	d.POST("/new/update/status", new(admin.New).NewUpdateStatus)
 	d.GET("/new/info", new(admin.New).NewInfo)
 	d.GET("/new/list", new(admin.New).NewList)
+	//用户
+	d.POST("/user/add", new(admin.User).UserAdd)
+	d.POST("/user/update", new(admin.User).UserUpdate)
+	d.POST("/user/update/status", new(admin.User).UserUpdateStatus)
+	d.GET("/user/info", new(admin.User).UserInfo)
+	d.GET("/user/list", new(admin.User).UserList)
+	d.POST("/user/login", new(admin.User).Login)
 }
