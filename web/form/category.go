@@ -19,6 +19,6 @@ type CategoryUpdateStatusForm struct {
 }
 
 type CategoryFindForm struct {
-	Name	string	`json:"name"`
-	Pid		uint	`json:"pid"`
+	Name	string	`form:"name"`
+	Pid		uint	`form:"pid"`
 }

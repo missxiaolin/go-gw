@@ -115,7 +115,7 @@ func (t *Category) GetCategory(c *gin.Context)  {
 	var (
 		categoryFindForm form.CategoryFindForm
 	)
-	err := c.BindJSON(&categoryFindForm)
+	err := c.BindQuery(&categoryFindForm)
 	if err != nil {
 		t.Err(c, "json解析错误", 500)
 		return
