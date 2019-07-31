@@ -2,9 +2,9 @@ package admin
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-gw/common"
 	"go-gw/web/controller"
 	"go-gw/web/form"
+	"go-gw/web/formatter"
 	"go-gw/web/model"
 	"go-gw/web/service"
 )
@@ -15,7 +15,7 @@ type New struct{ controller.Base }
 func (t *New) NewAdd(c *gin.Context) {
 	var (
 		NewAddForm form.NewAddForm
-		err error
+		err        error
 	)
 	err = c.BindJSON(&NewAddForm)
 	if err != nil {
@@ -28,13 +28,13 @@ func (t *New) NewAdd(c *gin.Context) {
 		return
 	}
 	_, err = new(service.NewService).NewAdd(model.Article{
-		Cid: NewAddForm.Cid,
-		Title: NewAddForm.Title,
-		Author: NewAddForm.Author,
-		Content: NewAddForm.Content,
-		Keywords: NewAddForm.Keywords,
+		Cid:         NewAddForm.Cid,
+		Title:       NewAddForm.Title,
+		Author:      NewAddForm.Author,
+		Content:     NewAddForm.Content,
+		Keywords:    NewAddForm.Keywords,
 		Description: NewAddForm.Description,
-		Status: NewAddForm.Status,
+		Status:      NewAddForm.Status,
 	})
 	if err != nil {
 		t.Err(c, err.Error(), 500)
@@ -48,7 +48,7 @@ func (t *New) NewAdd(c *gin.Context) {
 func (t *New) NewUpdate(c *gin.Context) {
 	var (
 		NewUpdateForm form.NewUpdateForm
-		err error
+		err           error
 	)
 	err = c.BindJSON(&NewUpdateForm)
 	if err != nil {
@@ -67,7 +67,7 @@ func (t *New) NewUpdate(c *gin.Context) {
 		t.Err(c, err.Error(), 500)
 		return
 	}
-	article.Cid =  NewUpdateForm.Cid
+	article.Cid = NewUpdateForm.Cid
 	article.Title = NewUpdateForm.Title
 	article.Author = NewUpdateForm.Author
 	article.Content = NewUpdateForm.Content
@@ -124,27 +124,29 @@ func (t *New) NewUpdateStatus(c *gin.Context) {
 func (t *New) NewList(c *gin.Context) {
 	var (
 		NewSearchForm form.NewSearchForm
+		count         uint
 	)
-	err := c.BindJSON(&NewSearchForm)
+	err := c.BindQuery(&NewSearchForm)
 	if err != nil {
 		t.Err(c, "json解析错误", 500)
 		return
 	}
-	err = t.Validator(c, NewSearchForm)
-	if err != nil {
-		t.Err(c, "参错错误", 300)
-		return
-	}
-
-	itemList, err := new(service.NewService).NewList(NewSearchForm)
+	newService := new(service.NewService)
+	itemList, err := newService.NewList(NewSearchForm)
 	if err != nil {
 		t.Succ(c, "ok")
 		return
 	}
-	data, err := common.ArrayStructToMap(itemList)
-	if err != nil {
-		t.Err(c, "解析出错", 500)
-		return
+
+	var dataSet = make([]interface{}, 0)
+
+	for _, item := range itemList {
+		dataSet = append(dataSet, formatter.NewBase(item))
 	}
-	t.Data(c, data)
+
+	newService.GetNewCount(&count)
+	t.Succ(c, "ok", gin.H{
+		"item":  dataSet,
+		"count": count,
+	})
 }

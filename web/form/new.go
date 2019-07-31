@@ -27,7 +27,7 @@ type NewUpdateStatusForm struct {
 }
 
 type NewSearchForm struct {
-	Page			uint		`validate:"required";json:"page"`
-	PageSize		uint		`validate:"required";json:"pageSize"`
-	Cid				uint		`json:"cid"`
+	Page			uint		`form:"page"`
+	PageSize		uint		`form:"pageSize"`
+	Cid				uint		`form:"cid"`
 }

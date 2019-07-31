@@ -36,12 +36,24 @@ func (s *NewService) NewUpdate(new model.Article) {
 	return
 }
 
+func (s *NewService) GetNewCount(count *uint)  {
+
+	db := database.NewDB()
+	db.Model(&model.Article{}).Count(count);
+}
+
 // 文章列表
 func (s *NewService) NewList(form form.NewSearchForm) (itemList []model.Article, err error) {
 	db := database.NewDB()
 
 	if form.Cid != 0 {
 		db = db.Where("cid = ?", form.Cid)
+	}
+	if form.Page == 0 {
+		form.Page = 1
+	}
+	if form.PageSize == 0 {
+		form.PageSize = 15
 	}
 	db.Limit(form.PageSize).Offset((form.Page - 1) * form.PageSize).Find(&itemList)
 

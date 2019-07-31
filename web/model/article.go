@@ -11,3 +11,7 @@ type Article struct {
 	Status		uint		`gorm:"type:tinyint;not null;" json:"status"`
 	Timestamps
 }
+
+func (c *Article) getTable() string {
+	return "article"
+}
