@@ -12,10 +12,12 @@ type Base struct{
 	Ctx *gin.Context
 }
 
+// 返回
 func (t *Base) Api(c *gin.Context, code int, data interface{}) {
 	c.JSON(code, data)
 }
 
+// 成功
 func (t *Base) Succ(c *gin.Context, msg string, data ...interface{}) {
 
 	var d interface{}
@@ -30,10 +32,12 @@ func (t *Base) Succ(c *gin.Context, msg string, data ...interface{}) {
 	})
 }
 
+// 成功
 func (t *Base) Data(c *gin.Context, data interface{}) {
 	t.Api(c, http.StatusOK, data)
 }
 
+// 转换
 func (t *Base) Array(c *gin.Context, data interface{}) {
 
 	data, err := common.ArrayStructToMap(data)
@@ -44,6 +48,7 @@ func (t *Base) Array(c *gin.Context, data interface{}) {
 	t.Data(c, data)
 }
 
+// 抛错
 func (t *Base) Err(c *gin.Context, msg string, ErrorCode uint) {
 
 	fmt.Println("[Error]", msg)
@@ -54,12 +59,13 @@ func (t *Base) Err(c *gin.Context, msg string, ErrorCode uint) {
 	})
 }
 
-func (t *Base) Validator(c *gin.Context, ValidatorData interface{}) bool {
+// 验证器
+func (t *Base) Validator(c *gin.Context, ValidatorData interface{}) (err error) {
 	validator := govalidators.New()
-	err := validator.LazyValidate(ValidatorData)
+	err = validator.LazyValidate(ValidatorData)
 	if err != nil {
 		fmt.Println("err:", err)
-		return false
+		return err
 	}
-	return true
+	return nil
 }

@@ -15,15 +15,14 @@ type Category struct{ controller.Base }
 func (t *Category) CategoryAdd(c *gin.Context)  {
 	var (
 		CategoryAddForm form.CategoryAddForm
-		isValidator bool
 	)
 	err := c.BindJSON(&CategoryAddForm)
 	if err != nil {
 		t.Err(c, "json解析错误", 500)
 		return
 	}
-	isValidator = t.Validator(c, CategoryAddForm)
-	if !isValidator {
+	err = t.Validator(c, CategoryAddForm)
+	if err != nil {
 		t.Err(c, "参错错误", 300)
 		return
 	}
