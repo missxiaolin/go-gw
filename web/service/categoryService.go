@@ -20,6 +20,20 @@ func (s *CategoryService) CategoryAdd(category model.Category) (model.Category, 
 	return category, nil
 }
 
+// 根据id查找分类
+func (s *CategoryService) GetCategoryByID(id interface{}) (category model.Category, err error) {
+	database.NewDB().Where("id = ?", id).First(&category)
+	if category.ID == 0 {
+		err = errors.New("未查到到分类")
+	}
+	return category, err
+}
+
+// 修改分类
+func (s *CategoryService) CategoryUpdate(category model.Category) {
+	database.NewDB().Save(category)
+}
+
 // 搜索分类
 func (s *CategoryService) Search(name string, pid uint) (itemList []model.Category, err error) {
 	db := database.NewDB()
