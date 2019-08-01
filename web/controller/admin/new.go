@@ -91,7 +91,8 @@ func (t *New) NewInfo(c *gin.Context) {
 		t.Err(c, err.Error(), 500)
 		return
 	}
-	t.Succ(c, "ok", article)
+	data := formatter.NewBase(article)
+	t.Succ(c, "ok", data)
 }
 
 // 修改文章状态

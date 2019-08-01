@@ -2,9 +2,9 @@ package admin
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-gw/common"
 	"go-gw/web/controller"
 	"go-gw/web/form"
+	"go-gw/web/formatter"
 	"go-gw/web/model"
 	"go-gw/web/service"
 )
@@ -81,7 +81,8 @@ func (t *Category) CategoryInfo(c *gin.Context) {
 		t.Err(c, err.Error(), 500)
 		return
 	}
-	t.Succ(c, "ok", category)
+	data := formatter.CategoryBase(category)
+	t.Succ(c, "ok", data)
 }
 
 // 更改分类状态
@@ -125,10 +126,11 @@ func (t *Category) GetCategory(c *gin.Context)  {
 		t.Succ(c, "ok")
 		return
 	}
-	data, err := common.ArrayStructToMap(categoryList)
-	if err != nil {
-		t.Err(c, "解析出错", 500)
-		return
+	var dataSet = make([]interface{}, 0)
+
+	for _, item := range categoryList {
+		dataSet = append(dataSet, formatter.CategoryBase(item))
 	}
-	t.Succ(c, "ok", data)
+
+	t.Succ(c, "ok", dataSet)
 }
