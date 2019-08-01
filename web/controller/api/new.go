@@ -18,7 +18,7 @@ func (t *New)  SearchNewList(c *gin.Context)  {
 		NewSearchForm form.NewSearchForm
 		count         uint
 	)
-	err := c.BindJSON(&NewSearchForm)
+	err := c.BindQuery(&NewSearchForm)
 	if err != nil {
 		t.Err(c, "json解析错误", 500)
 		return
