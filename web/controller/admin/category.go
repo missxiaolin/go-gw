@@ -134,3 +134,19 @@ func (t *Category) GetCategory(c *gin.Context)  {
 
 	t.Succ(c, "ok", dataSet)
 }
+
+// 获取全部分类
+func (t *Category) GetCategoryAll(c *gin.Context) {
+	categoryList, err := new(service.CategoryService).GetAll()
+	if err != nil {
+		t.Succ(c, "ok")
+		return
+	}
+	var dataSet = make([]interface{}, 0)
+
+	for _, item := range categoryList {
+		dataSet = append(dataSet, formatter.CategoryBase(item))
+	}
+
+	t.Succ(c, "ok", dataSet)
+}

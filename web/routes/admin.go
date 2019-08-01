@@ -15,6 +15,7 @@ func AdminConfigure(b *bootstrap.Bootstrapper)  {
 	d.GET("/category/info", new(admin.Category).CategoryInfo)
 	d.POST("/category/update/status", new(admin.Category).CategoryUpdateStatus)
 	d.GET("/category/list", new(admin.Category).GetCategory)
+	d.GET("/category/get/all", new(admin.Category).GetCategoryAll)
 	// 文章
 	d.POST("/new/add", new(admin.New).NewAdd)
 	d.POST("/new/update", new(admin.New).NewUpdate)

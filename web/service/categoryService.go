@@ -46,3 +46,10 @@ func (s *CategoryService) Search(name string, pid uint) (itemList []model.Catego
 	db.Find(&itemList)
 	return
 }
+
+// 获取全部分类
+func (s *CategoryService) GetAll() (itemList []model.Category, err error) {
+	db := database.NewDB()
+	db.Find(&itemList)
+	return
+}
