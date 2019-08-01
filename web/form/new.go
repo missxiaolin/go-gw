@@ -30,4 +30,5 @@ type NewSearchForm struct {
 	Page			uint		`form:"page"`
 	PageSize		uint		`form:"pageSize"`
 	Cid				uint		`form:"cid"`
+	Status			uint		`form:"status"`
 }

@@ -55,6 +55,9 @@ func (s *NewService) NewList(form form.NewSearchForm) (itemList []model.Article,
 	if form.PageSize == 0 {
 		form.PageSize = 15
 	}
+	if form.Status != 0 {
+		db = db.Where("status = ?", form.Status)
+	}
 	db.Limit(form.PageSize).Offset((form.Page - 1) * form.PageSize).Find(&itemList)
 
 	return

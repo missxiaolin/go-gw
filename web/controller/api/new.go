@@ -28,12 +28,14 @@ func (t *New)  SearchNewList(c *gin.Context)  {
 		t.Err(c, "参错错误", 300)
 		return
 	}
+	NewSearchForm.Status = 2
 	newService := new(service.NewService)
 	itemList, err := newService.NewList(NewSearchForm)
 	if err != nil {
 		t.Succ(c, "ok")
 		return
 	}
+
 	var dataSet = make([]interface{}, 0)
 
 	for _, item := range itemList {
