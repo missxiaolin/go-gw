@@ -9,7 +9,7 @@ import (
 func AdminConfigure(b *bootstrap.Bootstrapper)  {
 	d := b.Group("/admin")
 	d.POST("/user/login", new(admin.User).Login)
-	
+
 	d.Use(middleware.AdminAuth)
 	{
 		// 七牛
