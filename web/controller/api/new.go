@@ -2,9 +2,9 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-gw/common"
 	"go-gw/web/controller"
 	"go-gw/web/form"
+	"go-gw/web/formatter"
 	"go-gw/web/service"
 )
 
@@ -13,9 +13,10 @@ type New struct {
 }
 
 // 对应前端api接口
-func (t *New) SearchNewList(c *gin.Context)  {
+func (t *New)  SearchNewList(c *gin.Context)  {
 	var (
 		NewSearchForm form.NewSearchForm
+		count         uint
 	)
 	err := c.BindJSON(&NewSearchForm)
 	if err != nil {
@@ -27,16 +28,20 @@ func (t *New) SearchNewList(c *gin.Context)  {
 		t.Err(c, "参错错误", 300)
 		return
 	}
-
-	itemList, err := new(service.NewService).NewList(NewSearchForm)
+	newService := new(service.NewService)
+	itemList, err := newService.NewList(NewSearchForm)
 	if err != nil {
 		t.Succ(c, "ok")
 		return
 	}
-	data, err := common.ArrayStructToMap(itemList)
-	if err != nil {
-		t.Err(c, "解析出错", 500)
-		return
+	var dataSet = make([]interface{}, 0)
+
+	for _, item := range itemList {
+		dataSet = append(dataSet, formatter.NewBase(item))
 	}
-	t.Data(c, data)
+	newService.GetNewCount(&count)
+	t.Succ(c, "ok", gin.H{
+		"item":  dataSet,
+		"count": count,
+	})
 }
